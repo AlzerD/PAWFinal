@@ -2,39 +2,50 @@
 <%= form_for @user, :as => :user, :url => sign_in_path(@user) do |f| %>
 
 <form class="form-horizontal">
-<fieldset>
+  <fieldset>
 
-  <!-- Form Name -->
-  <legend>Sign In</legend>
-  
-  <!-- username or email input-->
-  <div class="control-group">
-    <div class="controls">
-      <%= f.text_field :username,placeholder: 'username or email', :required => true %>   
-      <%= show_field_error(@user, :username) %>
+      <!-- Form Name -->
+      <legend>Sign In</legend>
+
+      <!-- username or email input-->
+      <div class="control-group">
+        <div class="controls">
+          <%= f.text_field :username,placeholder: 'username or email', :required => true %>   
+          <%= show_field_error(@user, :username) %>
+        </div>
+      </div>
+
+
+    <!-- Password input-->
+    <div class="control-group">
+      <div class="controls">
+        <%= f.password_field :password, placeholder: 'password',:required => true %>
+        <p class="help-block"><%= show_field_error(@user, :password) %></p>
+      </div>
     </div>
-  </div>
 
 
-<!-- Password input-->
-<div class="control-group">
-  <div class="controls">
-    <%= f.password_field :password, placeholder: 'password',:required => true %>
-    <p class="help-block"><%= show_field_error(@user, :password) %></p>
-  </div>
-</div>
+      <!-- Submit / Rest buttons -->
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'Sign In' ,:class => "btn btn-success" %>
+        <%= f.submit 'Clear Form', :class => "btn btn-success",:type => 'reset' %>    
+      </div>
+    </div>
+
+<% end %>    
+    
+    <!-- Forgot Password -->
+    <div class="control-group">
+      <div class="controls">
+        <%= link_to 'Forgot password?', :forgot_password, :class => "btn btn-success" %>
+     </div>
+    </div>  
 
 
-<!-- Button (Double) -->
-<div class="control-group">
-  <div class="controls">
-    <%= f.submit 'Sign In' ,:class => "btn btn-success" %>
-    <%= f.submit 'Clear Form', :class => "btn btn-success",:type => 'reset' %>    
-  </div>
-</div>
 
-</fieldset>
+  </fieldset>
 </form>  
    
 
-<% end %>
+
