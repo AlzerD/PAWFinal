@@ -1,0 +1,28 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: d86ohh2cksp90m
+  username: bsejngwopmknvn
+  password: RQ4hD1R_M_jnhuK-sfuLEMufMT
+  host: ec2-54-83-199-115.compute-1.amazonaws.com
+  port: 5432
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: PAW_test
+  pool: 5
+  userName: PAW
+  password: 
+  
+production:
+  database: postgresql
+  encoding: unicode
+  database: PAW_production
+  pool: 5
+  username: PAW
+  password: 

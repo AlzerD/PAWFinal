@@ -1,0 +1,71 @@
+<%= form_for @user, :as => :user, :url => account_settings_path, :method => :put do |f| %>
+ 
+<div class="row">
+  <form class="form-horizontal">
+    <fieldset>
+
+      <!-- Form Name -->
+      <legend>Account Settings</legend>
+
+      <!-- existing password input -->
+      <div class="control-group">
+        <div class="controls">
+          <p><%= f.label 'current password:' %></p>
+          <p><%= f.password_field :password, :required => true %></p>   
+          <p class="help-block"><%= show_field_error(@user, :password) %></p><br/> 
+        </div>
+      </div>
+
+      <!-- new username input-->
+      <div class="control-group">
+        <div class="controls">
+          <p><%= f.label 'username: (leave unchanged if you are not changing your username)' %></p>
+          <p><%= f.text_field :username %></p>
+          <p class="help-block"><%= show_field_error(@user, :username) %></p><br/>
+        </div>
+      </div>
+
+      <!-- new email input-->
+      <div class="control-group">
+        <div class="controls">
+          <p><%= f.label 'email: (leave unchanged if you are not changing your email address)' %></p>
+          <p><%= f.text_field :email %></p>
+          <p class="help-block"><%= show_field_error(@user, :email) %></p><br/>
+        </div>
+      </div>
+
+      <!-- new password input-->
+      <div class="control-group">
+        <div class="controls">
+          <p><%= f.label 'new password: (leave blank if you are not changing your password)' %></p>
+          <p><%= f.password_field :new_password %></p>
+          <p class="help-block"><%= show_field_error(@user, :new_password) %></p><br/>
+        </div>
+      </div> 
+
+      <!-- new password confirmation -->
+      <div class="control-group">
+        <div class="controls">
+          <p><%= f.label 'password confirmation:' %></p>
+          <p><%= f.password_field :new_password_confirmation, placeholder: 'password confirmation:' %></p>
+          <p class="help-block"><%= show_field_error(@user, :new_password_confirmation) %></p><br/>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit 'Update' ,:class => "btn btn-success" %>
+        </div>
+      </div>
+
+    </fieldset>
+
+  </form>
+</div>  
+
+<% end %>
+
+
+
+

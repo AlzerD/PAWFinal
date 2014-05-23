@@ -1,0 +1,53 @@
+<!--# Written by Alan Dunne after following tutorials by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]-->
+<%= form_for @user, :as => :user, :url => new_user_path, :method => :put do |f| %>
+ 
+<form class="form-horizontal">
+<fieldset>
+
+  <!-- Form Name -->
+  <legend>Sign Up</legend>
+  
+  <!-- username input-->
+  <div class="control-group">
+    <div class="controls">
+      <p><%= f.text_field :username, placeholder: 'username', :required => true %></p>    
+      <p class="help-block"><%= show_field_error(@user, :username) %></p>
+    </div>
+  </div>
+
+<!-- email input-->
+<div class="control-group">
+  <div class="controls">
+    <p><%= f.text_field :email, placeholder: 'email', :required => true %></p> 
+    <p class="help-block"><%= show_field_error(@user, :email) %></p>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="control-group">
+  <div class="controls">
+    <p><%= f.password_field :password, placeholder: 'password', :required => true %></p> 
+    <p class="help-block"><%= show_field_error(@user, :password) %></p>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="control-group">
+  <div class="controls">
+    <p><%= f.password_field :password_confirmation, placeholder: 'password confirmation',:required => true %></p> 
+    <p class="help-block"><%= show_field_error(@user, :password_confirmation) %></p>
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="control-group">
+  <div class="controls">
+    <%= f.submit 'Sign Up' ,:class => "btn btn-success" %>
+    <%= f.submit 'Clear Form', :class => "btn btn-success",:type => 'reset' %>    
+  </div>
+</div>
+
+</fieldset>
+</form>   
+
+<% end %>

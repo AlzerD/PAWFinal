@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @match_pick.userID %>
+</p>
+
+<p>
+  <strong>Matchid:</strong>
+  <%= @match_pick.matchID %>
+</p>
+
+<p>
+  <strong>Userpick:</strong>
+  <%= @match_pick.userPick %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @match_pick.result %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @match_pick.points %>
+</p>
+
+<p>
+  <strong>Closed:</strong>
+  <%= @match_pick.closed %>
+</p>
+
+<%= link_to 'Edit', edit_match_pick_path(@match_pick) %> |
+<%= link_to 'Back', match_picks_path %>

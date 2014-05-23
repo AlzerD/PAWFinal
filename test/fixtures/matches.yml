@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  block: 1
+  round: MyString
+  date: 2014-05-02
+  day: MyString
+  time: MyString
+  venue: MyString
+  team1: MyString
+  team2: MyString
+  result: 1
+  resultString: MyString
+  played: false
+
+two:
+  block: 1
+  round: MyString
+  date: 2014-05-02
+  day: MyString
+  time: MyString
+  venue: MyString
+  team1: MyString
+  team2: MyString
+  result: 1
+  resultString: MyString
+  played: false

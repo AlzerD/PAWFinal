@@ -1,0 +1,41 @@
+<%= form_for(@match_pick) do |f| %>
+  <% if @match_pick.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match_pick.errors.count, "error") %> prohibited this match_pick from being saved:</h2>
+
+      <ul>
+      <% @match_pick.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :userID %><br>
+    <%= f.number_field :userID %>
+  </div>
+  <div class="field">
+    <%= f.label :matchID %><br>
+    <%= f.number_field :matchID %>
+  </div>
+  <div class="field">
+    <%= f.label :userPick %><br>
+    <%= f.number_field :userPick %>
+  </div>
+  <div class="field">
+    <%= f.label :result %><br>
+    <%= f.number_field :result %>
+  </div>
+  <div class="field">
+    <%= f.label :points %><br>
+    <%= f.number_field :points %>
+  </div>
+  <div class="field">
+    <%= f.label :closed %><br>
+    <%= f.check_box :closed %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

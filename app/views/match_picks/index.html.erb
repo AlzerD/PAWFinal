@@ -1,0 +1,52 @@
+<h1>Listing match_picks</h1>
+
+<div class= "span10 center-table">
+
+  <table class="table table-bordered table-condensed table-striped">
+    <thead>
+      <tr>
+        <th>Userid</th>
+        <th>Matchid</th>
+        <th>Team 1</th>
+        <th>Team 2</th>
+        <th>Userpick int</th>
+        <th>Userpick Result</th>
+        <th>Actual Result</th>
+        <th>Points earned</th>
+        <th>Closed</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @match_picks.each do |match_pick| %>
+        <tr>
+          <td><%= match_pick.userID %></td>
+          <td><%= match_pick.matchID %></td>
+          <td><%= match_pick.match.team1 %></td>
+          <td><%= match_pick.match.team2 %></td>
+          <td><%= match_pick.userPick %></td>
+          <% if (match_pick.userPick == 0) %>
+          <td>Draw</td>
+          <% elsif (match_pick.userPick == 1) %>
+          <td><%= match_pick.match.team1 %></td>
+          <% else %>
+          <td><%= match_pick.match.team2 %></td>
+          <% end %>
+          <td><%= match_pick.result %></td>
+          <td><%= match_pick.points %></td>
+          <td><%= match_pick.closed %></td>
+          <td><%= link_to 'Show', match_pick %></td>
+          <td><%= link_to 'Edit', edit_match_pick_path(match_pick) %></td>
+          <td><%= link_to 'Destroy', match_pick, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  
+  <%= link_to 'New Match pick', new_match_pick_path %>
+  
+</div>
+
+

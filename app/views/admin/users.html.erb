@@ -1,0 +1,29 @@
+<div class= "span10 center-table">
+<h1>Administer Users</h1>
+<table class="table table-bordered table-condensed table-striped" >
+  <tr>
+    <th class="col-sn-1">ID</th>
+    <th class="col-sn-2">Username</th>
+    <th class="col-sn-3">Email</th>
+    <th class="col-sn-2">Admin</th>
+    <th class="col-sn-1">Points</th>
+    <th class="col-sn-2">Leagues</th>
+    <th class="col-sn-1"></th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td><%= user.admin %></td>
+      <td><%= user.points %></td>
+      <td><%= user.leagues %></td>
+      <% if user[:id].between?(1,5) %>
+        <td></td>
+      <% else %> 
+        <td><%= button_to "Delete User", user, :confirm => 'Are you sure?', :id => "open-contacts-dialog-btn", :class => "btn btn-primary btn-sm", :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</div>

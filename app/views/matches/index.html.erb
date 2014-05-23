@@ -1,0 +1,81 @@
+<div class= "span10 center-table">
+
+  <% if (params[:first_match].to_i == 0) %> 
+    <h1>Administer matches</h1>
+  <% else %>
+     <h1>Block <%= @matches[0].block %></h1>
+  <% end %>  
+
+  <table class="table table-bordered table-condensed table-striped" >
+    <thead>
+      <tr>
+        <th style = 'visibility: hidden'></th>       
+        <th class="col-sn-1">ID</th>
+        <th class="col-sn-1">Block</th>
+        <th class="col-sn-1">Round</th>
+        <th class="col-sn-1">Date</th>
+        <th class="col-sn-1">Day</th>
+        <th class="col-sn-1">Time</th>
+        <th class="col-sn-1">Venue</th>
+        <th class="col-sn-1">Team1</th>
+        <th class="col-sn-1">Team2</th>
+       <% if (params[:first_match].to_i == 0) %> 
+        <th class="col-sn-1">Result</th>
+        <th class="col-sn-1">Result</th>
+        <th class="col-sn-1">Played</th>
+        <% else %>      
+        <th class="col-sn-1">User Pick</th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= form_tag create_match_pick_path, :method => :post do %>
+        <% @matches.each do |match| %>
+          <tr>
+            <td style = 'visibility: hidden'></td>
+            <td><%= match.id %></td>
+            <td><%= match.block %></td>
+            <td><%= match.round %></td>
+            <td><%= match.date %></td>
+            <td><%= match.day %></td>
+            <td><%= match.time %></td>
+            <td><%= match.venue %></td>
+            <td><%= match.team1 %></td>
+            <td><%= match.team2 %></td>
+
+            <% if (params[:first_match].to_i == 0) %> 
+            <td><%= match.result %></td>
+            <td><%= match.resultString %></td>
+            <td><%= match.played %></td>
+            <td><%= link_to 'Edit', edit_match_path(match) %></td>
+            <td><%= link_to 'Show', match %></td>
+            <% else %>
+            <td><%= select_tag "user_picks[]", options_for_select([["Draw", "0"], [match.team1, "1"], [match.team2, "2"]]), disabled: false, 'data-id' => match.id, :class => 'match_option' %></td>            
+            <td style = 'display:none'><%= check_box_tag "match_ids[]", match.id, false, :class => 'matchid', checked: true, include_hidden: false %></td>
+            <td></td>
+            
+            <% end %>       
+          </tr>
+        <% end %>
+    </tbody>      
+  </table>   
+        <%= button_tag :class => "btn-large btn-primary" do %> Submit Picks <% end %>   
+      <% end %>
+</div>
+
+<script type="text/javascript">
+$('.matchid').on('click', function () {
+    var dataid = $(this).val();
+    if (this.checked) {
+        $('select[data-id="'+ dataid +'"]').prop('disabled', false);
+    } else {
+        $('select[data-id="'+ dataid +'"]').prop('disabled', true);
+    }
+}); 
+</script>
+
+
+
+
+
