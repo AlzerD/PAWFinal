@@ -17,6 +17,8 @@ class AuthenticationController < ApplicationController
     end
 
     if user
+      update_authentication_token(user, params[:user][:remember_me])
+      user.save
       session[:user_id] = user.id
       flash[:notice] = 'Welcome' 
       redirect_to '/home'
@@ -31,9 +33,19 @@ class AuthenticationController < ApplicationController
   end
   
   def signed_out
-    session[:user_id] = nil
-    flash[:notice] = "You have been signed out."
-  end
+    # clear the authentication toke when the user manually signs out
+    user = User.find_by_id(session[:user_id])
+    
+    if user
+      update_authentication_token(user, nil)
+      user.save
+      session[:user_id] = nil
+      flash[:notice] = "You have been signed out."
+    else
+      redirect_to :sign_in
+    end
+  end   
+    
   
   def new_user
     @user = User.new
@@ -43,6 +55,7 @@ class AuthenticationController < ApplicationController
     @user = User.new(params[:user])
   
     if @user.valid?
+      update_authentication_token(@user, nil)
       @user.save
       UserMailer.welcome_email(@user).deliver
       session[:user_id] = @user.id
@@ -162,6 +175,9 @@ class AuthenticationController < ApplicationController
     end
   end  
   
+  
+  
+  
   # ========= Private Functions ==========
   
   private
@@ -179,6 +195,19 @@ class AuthenticationController < ApplicationController
     end
 
     result
+  end  
+  
+  def update_authentication_token(user, remember_me)
+    if remember_me == 1
+      # create an authentication token if the user has clicked on remember me
+      auth_token = SecureRandom.urlsafe_base64
+      user.authentication_token = auth_token
+      cookies.permanent[:auth_token] = auth_token
+    else # nil or 0
+      # if not, clear the token, as the user doesn't want to be remembered.
+      user.authentication_token = nil
+      cookies.permanent[:auth_token] = nil
+    end
   end  
   
 end

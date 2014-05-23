@@ -24,14 +24,21 @@
       </div>
     </div>
 
-
-      <!-- Submit / Rest buttons -->
+    <!-- Submit / Rest buttons -->
     <div class="control-group">
       <div class="controls">
         <%= f.submit 'Sign In' ,:class => "btn btn-success" %>
         <%= f.submit 'Clear Form', :class => "btn btn-success",:type => 'reset' %>    
       </div>
     </div>
+    
+    <!-- Get token if want to be remembered -->  
+    <div class="control-group">
+      <div class="controls">   
+        <%= f.check_box :remember_me %><%= f.label 'remember me' %>      
+      </div>
+    </div>  
+    
 
 <% end %>    
     

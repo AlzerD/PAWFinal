@@ -1,7 +1,7 @@
 # Class written by Alan Dunne after following tutorials by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]
 class User < ActiveRecord::Base
-  attr_accessible :email, :username, :password, :password_confirmation, :admin, :new_password, :new_password_confirmation
-  attr_accessor :password, :new_password, :previous_email, :previous_username
+  attr_accessible :email, :username, :password, :password_confirmation, :admin, :new_password, :new_password_confirmation, :remember_me
+  attr_accessor :password, :new_password, :previous_email, :previous_username, :remember_me
   before_save :encrypt_password
   has_many :match_picks
 
