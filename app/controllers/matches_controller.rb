@@ -4,11 +4,14 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.json
   def index
-    if(params[:first_match].to_i == 0)    
+    if((params[:block].to_i == 0)&&(current_user.id.between?(1,4)))    
       @matches = Match.all 
       puts params #Debug
+    elsif ((params[:block].to_i == 0)&&(current_user.id > 4))    
+      flash.now[:error] = 'You do not have access to that page!'
+      redirect_to :root
     else
-      @matches = Match.where(:id => params[:first_match].to_i..params[:last_match].to_i)
+      @matches = Match.where(:block => params[:block].to_i)
       puts params #Debug
      end
   end
@@ -71,14 +74,19 @@ class MatchesController < ApplicationController
      if params[:match_ids].nil?
        redirect_to matches_url, :flash => { :error => 'Your notice or whatever' } 
      else
+       @user = current_user 
+       puts "The user's email is " + @user.email # Debug
        @matches = Match.find(params[:match_ids])
        @userpick = params[:user_picks] unless params[:user_picks].nil?
+       @user.curr_block = @matches[0].block.to_i
+       @user.save
+       puts "The user's curr_block = " + @user.curr_block.to_s # Debug
        @matches.each_with_index do |match, index|
-         MatchPick.create!(:userID => session[:user_id], :matchID => match.id, :userPick => @userpick[index]) 
+         MatchPick.create!(:userID => session[:user_id], :matchID => match.id, :blockID => match.block, :userPick => @userpick[index] ) 
          if @matches.size == index + 1
            redirect_to blocks_path
          end
-        end
+        end       
      end
   end  
 

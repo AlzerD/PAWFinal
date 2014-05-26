@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :authenticate_user, :only => [:account_settings, :set_account_info]
   # helper_method written by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]
   helper_method :current_user
   def current_user
@@ -18,9 +19,9 @@ class ApplicationController < ActionController::Base
         redirect_to :root
       end      
     else
-      flash[:error] = 'Gerrup outta that ya sneaky pup ya'
+      flash[:error] = 'You must be signed in to view that page'
       redirect_to :root
     end 
-  end  
+  end 
   
 end

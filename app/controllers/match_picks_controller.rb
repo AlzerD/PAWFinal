@@ -1,5 +1,6 @@
 class MatchPicksController < ApplicationController
   before_action :set_match_pick, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user
 
   # GET /match_picks
   # GET /match_picks.json
@@ -8,7 +9,7 @@ class MatchPicksController < ApplicationController
       @match_picks = MatchPick.all 
       puts params #Debug
     else
-      @match_picks = MatchPick.where(:userID => session[:user_id],:matchID => params[:first_match].to_i..params[:last_match].to_i)
+      @match_picks = MatchPick.where(:userID => session[:user_id], :blockID => params[:block].to_i)
       puts params #Debug
     end      
   end

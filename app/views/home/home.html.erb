@@ -3,7 +3,7 @@
 <h1>World Cup 2014 Pick A Winner</h1>
   <% if current_user.admin==true %>
     <%= link_to "Administer Users", admin_users_path, :id => "open-contacts-dialog-btn", :class => "btn btn-large btn-primary", :method => :get %>
-    <%= link_to "Administer Matches", matches_path(:first_match => 0), :id => "open-contacts-dialog-btn", :class => "btn btn-large btn-primary", :method => :get %>
+    <%= link_to "Administer Matches", matches_path(:block => 0), :id => "open-contacts-dialog-btn", :class => "btn btn-large btn-primary", :method => :get %>
   <% end %> 
   
   <%= link_to "Match Blocks", blocks_path, :id => "open-contacts-dialog-btn", :class => "btn btn-large btn-primary", :method => :get %>

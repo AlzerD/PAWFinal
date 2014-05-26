@@ -1,119 +1,111 @@
-<div class= " col-md-1 text-center">
+  <h1>Matches</h1>
 
-<h1>Matches</h1>
+<div class= "span8 center-table">
+  <p id="notice"><%= notice %></p>
 
-<p id="notice"><%= notice %></p>
+      <% today=DateTime.now %>
+      <% block1Close = "12th June 2014 17:00" %>
+      <% block2Close = "15th June 2014 15:00" %>
+      <% block3Close = "18th June 2014 15:00" %>
+      <% block4Close = "21st June 2014 15:00" %>
+      <% block5Close = "24th June 2014 15:00" %>
+      <% block6Close = "28th June 2014 15:00" %>
+      <% block7Close = "30th June 2014 15:00" %>
+      <% block8Close = "4th July 2014 15:00" %>
+      <% block9Close = "8th July 19:00" %>
+      <% block10Close = "12th July 19:00" %>
 
-<% today=DateTime.now %>
-
-
-<div>
-  <div>
-    <% block1Close = "2013-06-12 17:00".to_datetime %>
-    
-    <% if today<=block1Close %>
-      <%= link_to "Match Block 1", matches_path(:first_match => 1, :last_match => 8), :class => "btn btn-success", :method => :get %>
-    <% else %>
-      <%= link_to "Block 1 picks", match_picks_path(:first_match => 1, :last_match => 8), :class => "btn btn-success", :method => :get %>
-    <% end %>    
-    
-    <% if today<=block1Close %>
-    <p>This block's match selections must be made before 17:00 on 12th June 2014 </p>
-    <% else %>
-    <p>This block is now closed to selections. You can check your picks and see results only</p>
-    <% end %> 
-  </div>
+  <table class="table table-bordered table-hover table-striped" >
+    <thead>
+      <tr>
+        <th class="col-sm-3"></th>
+        <th class="col-sm-2">Status</th>
+        <th class="col-sm-3">Closing</th>
+      </tr>
+    </thead>  
   
-  <div>
-      <%= link_to "Match Block 2", matches_path(:first_match => 9, :last_match => 17), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-06-15 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 15th June 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>
+  <tbody>  
+     <tr>
+        <% if ((today<=block1Close.to_datetime)&&(current_user.curr_block < 1)) %>
+          <td><%= link_to "Block 1", matches_path(:block => 1), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 1", match_picks_path(:block => 1), :class => "btn", :method => :get %></td>
+        <% end %>    
 
-  <div>
-      <%=link_to "Match Block 3", matches_path(:first_match => 18, :last_match => 26), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-06-18 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 18th June 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>
+        <% if ((today<=block1Close.to_datetime)&&(current_user.curr_block < 1)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block1Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>N/A</td>
+        <% end %>
+    </tr>
+    
+     <tr>
+        <% if ((today<=block2Close.to_datetime)&&(current_user.curr_block < 2)) %>
+          <td><%= link_to "Block 2", matches_path(:block => 2), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 2", match_picks_path(:block => 2), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block2Close.to_datetime)&&(current_user.curr_block < 2)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block2Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>N/A</td>
+        <% end %>
+    </tr>  
+    
+     <tr>
+        <% if ((today<=block3Close.to_datetime)&&(current_user.curr_block < 3)) %>
+          <td><%= link_to "Block 3", matches_path(:block => 3), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 3", match_picks_path(:block => 3), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block3Close.to_datetime)&&(current_user.curr_block < 3)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block3Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>N/A</td>
+        <% end %>
+    </tr>       
+
+     <tr>
+        <% if ((today<=block4Close.to_datetime)&&(current_user.curr_block < 4)) %>
+          <td><%= link_to "Block 4", matches_path(:block => 4), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 4", match_picks_path(:block => 4), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block4Close.to_datetime)&&(current_user.curr_block < 4)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block4Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>N/A</td>
+        <% end %>
+    </tr>     
+    
+     <tr>
+        <% if ((today<=block5Close.to_datetime)&&(current_user.curr_block < 5)) %>
+          <td><%= link_to "Block 5", matches_path(:block => 5), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 5", match_picks_path(:block => 5), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block5Close.to_datetime)&&(current_user.curr_block < 5)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block5Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>N/A</td>
+        <% end %>
+    </tr>  
+    
+  </tbody>
+    
+</div>
  
-  <div>
-      <%=link_to "Match Block 4", matches_path(:first_match => 27, :last_match => 36), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-06-21 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 21st June 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>  
-  
-  <div>
-      <%=link_to "Match Block 5", matches_path(:first_match => 37, :last_match => 48), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-06-24 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 24th June 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div> 
-  
-  <div>
-      <%=link_to "Match Block 6", matches_path(:first_match => 49, :last_match => 52), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-06-28 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 28th June 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>   
-  
-  <div>
-      <%=link_to "Match Block 7", matches_path(:first_match => 53, :last_match => 56), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-06-30 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 30th June 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>   
-  
-  <div>
-      <%=link_to "Match Block 8", matches_path(:first_match => 57, :last_match => 60), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-07-04 15:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 15:00 on 4th July 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>   
-  
-  <div>
-      <%=link_to "Match Block 9", matches_path(:first_match => 61, :last_match => 62), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-07-08 19:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 19:00 on 8th July 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div> 
-  
-  <div>
-      <%=link_to "Match Block 10", matches_path(:first_match => 63, :last_match => 64), :class => "btn btn-success", :method => :get %>
-    <% block1Close = "2014-07-12 19:00".to_datetime %>
-      <% if today<=block1Close %>
-    <p>This block's match selections must be made before 19:00 on 12th July 2014 </p>
-      <% else %>
-          <p>This block is now closed to selections. You can check your picks and see results only</p>
-      <% end %> 
-  </div>  
-   
-</div>
-  
-</div>

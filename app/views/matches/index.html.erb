@@ -1,6 +1,6 @@
 <div class= "span10 center-table">
 
-  <% if (params[:first_match].to_i == 0) %> 
+  <% if (params[:block].to_i == 0) %> 
     <h1>Administer matches</h1>
   <% else %>
      <h1>Block <%= @matches[0].block %></h1>
@@ -13,13 +13,13 @@
         <th class="col-sn-1">ID</th>
         <th class="col-sn-1">Block</th>
         <th class="col-sn-1">Round</th>
-        <th class="col-sn-1">Date</th>
+        <th class="span2">Date</th>
         <th class="col-sn-1">Day</th>
         <th class="col-sn-1">Time</th>
         <th class="col-sn-1">Venue</th>
         <th class="col-sn-1">Team1</th>
         <th class="col-sn-1">Team2</th>
-       <% if (params[:first_match].to_i == 0) %> 
+       <% if (params[:block].to_i == 0) %> 
         <th class="col-sn-1">Result</th>
         <th class="col-sn-1">Result</th>
         <th class="col-sn-1">Played</th>
@@ -44,7 +44,7 @@
             <td><%= match.team1 %></td>
             <td><%= match.team2 %></td>
 
-            <% if (params[:first_match].to_i == 0) %> 
+            <% if (params[:block].to_i == 0) %> 
             <td><%= match.result %></td>
             <td><%= match.resultString %></td>
             <td><%= match.played %></td>
@@ -60,7 +60,12 @@
         <% end %>
     </tbody>      
   </table>   
-        <%= button_tag :class => "btn-large btn-primary" do %> Submit Picks <% end %>   
+        <% if ((params[:block].to_i != 0)&&(current_user.curr_block==params[:block].to_i - 1)) %> 
+          <%= button_tag :class => "btn-large btn-primary" do %> Submit Picks <% end %> 
+        <% else %> 
+          <p>You must complete your block picks in order. Please submit Block <%= (current_user.curr_block)+1 %> picks first<p>
+        <% end %>
+  
       <% end %>
 </div>
 
