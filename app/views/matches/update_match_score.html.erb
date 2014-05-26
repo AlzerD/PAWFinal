@@ -1,0 +1,59 @@
+<div class= " col-md-1 text-center">
+  <h1>Update score</h1>
+
+  <div class= " col-md-1 text-center">
+    <%= form_tag update_match_score_path, :method => :post do |f| %>    
+      <div class="field">
+        <%= f.label :block %><br>
+        <%= f.number_field :block %>
+      </div>
+      <div class="field">
+        <%= f.label :round %><br>
+        <%= f.text_field :round %>
+      </div>
+      <div class="field">
+        <%= f.label :date %><br>
+        <%= f.date_select :date %>
+      </div>
+      <div class="field">
+        <%= f.label :day %><br>
+        <%= f.text_field :day %>
+      </div>
+      <div class="field">
+        <%= f.label :time %><br>
+        <%= f.text_field :time %>
+      </div>
+      <div class="field">
+        <%= f.label :venue %><br>
+        <%= f.text_field :venue %>
+      </div>
+      <div class="field">
+        <%= f.label :team1 %><br>
+        <%= f.text_field :team1 %>
+      </div>
+      <div class="field">
+        <%= f.label :team2 %><br>
+        <%= f.text_field :team2 %>
+      </div>
+      <div class="field">
+        <%= f.label :result %>(0 for draw, 1 for Team1, 2 for Team2)<br>
+        <%= f.number_field :result %>
+      </div>
+      <div class="field">
+        <%= f.label :resultString %><br>
+        <%= f.text_field :resultString %>
+      </div>
+      <div class="field">
+        <%= f.label :played %><br>
+        <%= f.check_box :played %>
+      </div>
+      <div class="actions">
+        <%= button_tag :class => "btn-large btn-primary" do %> Update scores <% end %> 
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to 'Show', @match %> |
+  <%= link_to 'Back', matches_path %>
+  
+</div>

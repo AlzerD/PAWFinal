@@ -45,7 +45,7 @@
     <%= f.text_field :team2 %>
   </div>
   <div class="field">
-    <%= f.label :result %><br>
+    <%= f.label :result %>(0 for draw, 1 for Team1, 2 for Team2)<br>
     <%= f.number_field :result %>
   </div>
   <div class="field">
@@ -57,6 +57,10 @@
     <%= f.check_box :played %>
   </div>
   <div class="actions">
+    
+    
+    
+    
     <%= f.submit %>
   </div>
 <% end %>

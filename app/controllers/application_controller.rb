@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user, :only => [:account_settings, :set_account_info]
+  before_filter :authenticate_user, :except => [:sign_in, :login, :register, :new_user, :signed_out]
   # helper_method written by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]
   helper_method :current_user
   def current_user
@@ -13,15 +13,19 @@ class ApplicationController < ActionController::Base
   
   # authenticate_user written by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]
   def authenticate_user
-    if current_user
-      if current_user.admin!=true
-        flash[:error] = 'Sorry but you do not have access to that page.'
-        redirect_to :root
-      end      
-    else
-      flash[:error] = 'You must be signed in to view that page'
-      redirect_to :root
+    if current_user.nil?
+        flash[:error] = 'You must be signed in to view that page'
+        redirect_to :root 
     end 
-  end 
+  end
+  
+  def authenticate_admin
+    if current_user.admin != true
+      flash[:error] = 'Sorry but you do not have access to that pageYou must be signed in to view that page'
+        redirect_to :root 
+    end 
+  end    
+  
+  
   
 end

@@ -59,6 +59,7 @@ class AuthenticationController < ApplicationController
       update_authentication_token(@user, nil)
       @user.signed_up_on = DateTime.now
       @user.last_signed_in_on = @user.signed_up_on
+      @user.curr_block = 0
       @user.save
       UserMailer.welcome_email(@user).deliver
       session[:user_id] = @user.id

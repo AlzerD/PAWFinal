@@ -1,19 +1,18 @@
 class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
-
   # GET /matches
   # GET /matches.json
+  
   def index
-    if((params[:block].to_i == 0)&&(current_user.id.between?(1,4)))    
+    if((params[:block].to_i == 0)&&(current_user.admin == true))    
       @matches = Match.all 
       puts params #Debug
-    elsif ((params[:block].to_i == 0)&&(current_user.id > 4))    
-      flash.now[:error] = 'You do not have access to that page!'
-      redirect_to :root
-    else
-      @matches = Match.where(:block => params[:block].to_i)
-      puts params #Debug
-     end
+    elsif (params[:block].to_i.between?(1,10))  
+      @matches = Match.where(:block => params[:block].to_i)     
+    else    
+      flash[:error] = 'Not a valid block'
+      redirect_to :blocks
+    end
   end
 
   # GET /matches/1
@@ -48,7 +47,7 @@ class MatchesController < ApplicationController
 
   # PATCH/PUT /matches/1
   # PATCH/PUT /matches/1.json
-  def update
+  def update      
     respond_to do |format|
       if @match.update(match_params)
         format.html { redirect_to @match, notice: 'Match was successfully updated.' }
@@ -58,6 +57,10 @@ class MatchesController < ApplicationController
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
     end
+    
+    MatchPick.where(:matchID => params[:id]).update_all(result: match_params[:result])
+    MatchPick.where(:matchID => params[:id]).update_all(points: '0')
+    MatchPick.where(:matchID => params[:id], :userPick => match_params[:result]).update_all(points: '3')
   end
 
   # DELETE /matches/1
@@ -89,6 +92,12 @@ class MatchesController < ApplicationController
         end       
      end
   end  
+  
+  def update_match_score
+    puts params
+  end
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

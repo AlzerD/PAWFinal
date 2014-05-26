@@ -1,7 +1,11 @@
-<h1>Listing match_picks</h1>
-
 <div class= "span10 center-table">
 
+  <% if ((params[:block].to_i == 0)&&(current_user.admin == true)) %> 
+    <h1>Match Picks</h1>
+  <% else (params[:block].to_i.between?(1,10)) %>  
+    <h1>Block <%= @match_picks[0].blockID %></h1>
+  <% end %>  
+  
   <table class="table table-bordered table-condensed table-striped">
     <thead>
       <tr>
@@ -44,10 +48,7 @@
       <% end %>
     </tbody>
   </table>
-
-  <br>
   
-  <%= link_to 'New Match pick', new_match_pick_path %>
   
 </div>
 

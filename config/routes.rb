@@ -16,10 +16,12 @@ Rails.application.routes.draw do
   get "admin_users" => "admin#users"
   delete "user/:id" => "admin#delete_user", :as => "user"
   get "admin_users" => "authentication#admin_users"
-  get '/home', to: 'home#home'
+  get '/home', to: 'userhome#home'
   get '/instructions', to: 'home#instructions'
-  get '/blocks', to: 'home#blocks'  
+  get '/blocks', to: 'matches#blocks'  
   post "match/create-match-pick" => "matches#create_match_pick", :as => :create_match_pick
+  get "update_score" => "matches#update_match_score", :as => :update_score
+  post "update_score" => "matches#update_match_score", :as => :update_match_score
   get "account_settings" => "authentication#account_settings"
   put "account_settings" => "authentication#set_account_info"
   get "forgot_password" => "authentication#forgot_password"

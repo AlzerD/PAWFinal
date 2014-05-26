@@ -1,0 +1,202 @@
+  <h1>Match Blocks</h1>
+
+<div class= "span8 center-table">
+  <p id="notice"><%= notice %></p>
+
+      <% today=DateTime.now %>
+      <% block1Close = "12th June 2014 17:00" %>
+      <% block2Close = "15th June 2014 15:00" %>
+      <% block3Close = "18th June 2014 15:00" %>
+      <% block4Close = "21st June 2014 15:00" %>
+      <% block5Close = "24th June 2014 15:00" %>
+      <% block6Close = "28th June 2014 15:00" %>
+      <% block7Close = "30th June 2014 15:00" %>
+      <% block8Close = "4th July 2014 15:00" %>
+      <% block9Close = "8th July 2014 19:00" %>
+      <% block10Close = "12th July 2014 19:00" %>
+
+  <table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <th class="col-sm-3">Stage</th>
+        <th class="col-sm-3">Button</th>
+        <th class="col-sm-2">Status</th>
+        <th class="col-sm-3">Closing</th>
+      </tr>
+    </thead>  
+  
+  <tbody>  
+     <tr>
+       <td>Group stages</td>
+        <% if ((today<=block1Close.to_datetime)&&(current_user.curr_block < 1)) %>
+          <td><%= link_to "Block 1", matches_path(:block => 1), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 1", match_picks_path(:block => 1), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block1Close.to_datetime)&&(current_user.curr_block < 1)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block1Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>
+    
+     <tr>
+       <td>Group stages</td>
+        <% if ((today<=block2Close.to_datetime)&&(current_user.curr_block < 2)) %>
+          <td><%= link_to "Block 2", matches_path(:block => 2), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 2", match_picks_path(:block => 2), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block2Close.to_datetime)&&(current_user.curr_block < 2)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block2Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>  
+    
+     <tr>
+       <td>Group stages</td>
+        <% if ((today<=block3Close.to_datetime)&&(current_user.curr_block < 3)) %>
+          <td><%= link_to "Block 3", matches_path(:block => 3), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 3", match_picks_path(:block => 3), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block3Close.to_datetime)&&(current_user.curr_block < 3)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block3Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>       
+
+     <tr>
+       <td>Group stages</td>
+        <% if ((today<=block4Close.to_datetime)&&(current_user.curr_block < 4)) %>
+          <td><%= link_to "Block 4", matches_path(:block => 4), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 4", match_picks_path(:block => 4), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block4Close.to_datetime)&&(current_user.curr_block < 4)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block4Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>     
+    
+     <tr>
+       <td>Group stages</td>
+        <% if ((today<=block5Close.to_datetime)&&(current_user.curr_block < 5)) %>
+          <td><%= link_to "Block 5", matches_path(:block => 5), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 5", match_picks_path(:block => 5), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block5Close.to_datetime)&&(current_user.curr_block < 5)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block5Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>  
+
+     <tr>
+       <td>Second Round</td>
+        <% if ((today<=block6Close.to_datetime)&&(current_user.curr_block < 6)) %>
+          <td><%= link_to "Block 6", matches_path(:block => 6), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 6", match_picks_path(:block => 6), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block6Close.to_datetime)&&(current_user.curr_block < 6)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block6Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>  
+    
+     <tr>
+       <td>Second Round</td>
+        <% if ((today<=block7Close.to_datetime)&&(current_user.curr_block < 7)) %>
+          <td><%= link_to "Block 7", matches_path(:block => 7), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 7", match_picks_path(:block => 7), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block7Close.to_datetime)&&(current_user.curr_block < 7)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block7Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr>  
+
+     <tr>
+       <td>Quarter Finals</td>
+        <% if ((today<=block8Close.to_datetime)&&(current_user.curr_block < 8)) %>
+          <td><%= link_to "Block 8", matches_path(:block => 8), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 8", match_picks_path(:block => 8), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block8Close.to_datetime)&&(current_user.curr_block < 8)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block8Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr> 
+    
+     <tr>
+       <td>Semi Finals</td>
+        <% if ((today<=block9Close.to_datetime)&&(current_user.curr_block < 9)) %>
+          <td><%= link_to "Block 9", matches_path(:block => 9), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 9", match_picks_path(:block => 9), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block9Close.to_datetime)&&(current_user.curr_block < 9)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block9Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr> 
+    
+     <tr>
+       <td>3rd/4th Playoff and Final</td>
+        <% if ((today<=block10Close.to_datetime)&&(current_user.curr_block < 10)) %>
+          <td><%= link_to "Block 10", matches_path(:block => 10), :class => "btn", :method => :get %></td>
+        <% else %>
+          <td><%= link_to "Block 10", match_picks_path(:block => 10), :class => "btn", :method => :get %></td>
+        <% end %>    
+
+        <% if ((today<=block10Close.to_datetime)&&(current_user.curr_block < 10)) %>
+           <td><span class="badge badge-success">Open</span></td> 
+           <td><%= block10Close %></td>
+        <% else %>  
+           <td><span class="badge badge-important">Submitted</span></td>          
+           <td>Closed</td>
+        <% end %>
+    </tr> 
+    
+  </tbody>
+    
+</div>
+ 

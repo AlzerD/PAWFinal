@@ -3,7 +3,7 @@
   <% if (params[:block].to_i == 0) %> 
     <h1>Administer matches</h1>
   <% else %>
-     <h1>Block <%= @matches[0].block %></h1>
+    <h1>Block <%= @matches[0].block %></h1>
   <% end %>  
 
   <table class="table table-bordered table-condensed table-striped" >
@@ -48,6 +48,7 @@
             <td><%= match.result %></td>
             <td><%= match.resultString %></td>
             <td><%= match.played %></td>
+            <td><%= link_to 'Update Score', update_score_path(match) %></td>
             <td><%= link_to 'Edit', edit_match_path(match) %></td>
             <td><%= link_to 'Show', match %></td>
             <% else %>

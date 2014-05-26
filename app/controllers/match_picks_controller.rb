@@ -1,16 +1,16 @@
 class MatchPicksController < ApplicationController
   before_action :set_match_pick, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user
-
   # GET /match_picks
   # GET /match_picks.json
   def index
-    if(params[:first_match].to_i == 0)    
+    if ((params[:block].to_i == 0)&&(current_user.admin == true))    
       @match_picks = MatchPick.all 
       puts params #Debug
+    elsif (params[:block].to_i.between?(1,10)) 
+      @match_picks = MatchPick.where(:userID => session[:user_id], :blockID => params[:block].to_i)      
     else
-      @match_picks = MatchPick.where(:userID => session[:user_id], :blockID => params[:block].to_i)
-      puts params #Debug
+      flash[:error] = 'Not a valid block'
+      redirect_to :blocks
     end      
   end
 
