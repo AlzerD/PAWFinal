@@ -1,8 +1,9 @@
 # Class written by Alan Dunne after following tutorials by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]
 class AdminController < ApplicationController
+  before_filter :authenticate_admin
   
   def users
-    @users = User.all
+    @users = User.all.order(:id) 
   end
 
   def delete_user

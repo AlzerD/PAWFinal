@@ -1,24 +1,24 @@
-<div class= "span10 center-table">
+<div class= "span20 center-table">
 
   <% if ((params[:block].to_i == 0)&&(current_user.admin == true)) %> 
     <h1>Match Picks</h1>
-  <% else (params[:block].to_i.between?(1,10)) %>  
+  <% else %>  
     <h1>Block <%= @match_picks[0].blockID %></h1>
   <% end %>  
   
   <table class="table table-bordered table-condensed table-striped">
     <thead>
       <tr>
-        <th>Userid</th>
-        <th>Matchid</th>
-        <th>Block</th>
-        <th>Team 1</th>
-        <th>Team 2</th>
-        <th>Userpick int</th>
-        <th>Userpick Result</th>
-        <th>Actual Result</th>
-        <th>Points earned</th>
-        <th>Closed</th>
+        <th class="col-sn-1">Userid</th>
+        <th class="col-sn-1">Matchid</th>
+        <th class="col-sn-1">Block</th>
+        <th class="col-sn-1">Team 1</th>
+        <th class="col-sn-1">Team 2</th>
+        <th class="col-sn-1">Userpick int</th>
+        <th class="col-sn-1">Userpick Result</th>
+        <th class="col-sn-5">Actual Result</th>
+        <th class="col-sn-1">Points earned</th>
+        <th class="col-sn-1">Closed</th>
       </tr>
     </thead>
 
@@ -32,22 +32,42 @@
           <td><%= match_pick.match.team2 %></td>
           <td><%= match_pick.userPick %></td>
           <% if (match_pick.userPick == 0) %>
-          <td>Draw</td>
+            <td>Draw</td>
           <% elsif (match_pick.userPick == 1) %>
-          <td><%= match_pick.match.team1 %></td>
+            <td><%= match_pick.match.team1 %></td>
           <% else %>
-          <td><%= match_pick.match.team2 %></td>
+            <td><%= match_pick.match.team2 %></td>
           <% end %>
-          <td><%= match_pick.result %></td>
+          <td><%= match_pick.match.resultString %></td>
           <td><%= match_pick.points %></td>
           <td><%= match_pick.closed %></td>
-          <td><%= link_to 'Show', match_pick %></td>
-          <td><%= link_to 'Edit', edit_match_pick_path(match_pick) %></td>
-          <td><%= link_to 'Destroy', match_pick, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if (current_user.admin == true) %>
+            <td><%= link_to 'Edit', edit_match_pick_path(match_pick) %></td>
+          <% end %>
         </tr>
       <% end %>
+      
     </tbody>
   </table>
+  
+  <% if (params[:block].to_i != 0) %>
+  <table class="table">
+    
+    <tbody>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Total points:</th>
+        <th><%= @match_picks.sum(:points) %></th>
+        <th></th>
+    </tbody>    
+  </table>
+  <% end %>
+  
   
   
 </div>

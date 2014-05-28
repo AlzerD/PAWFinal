@@ -4,10 +4,10 @@ class MatchPicksController < ApplicationController
   # GET /match_picks.json
   def index
     if ((params[:block].to_i == 0)&&(current_user.admin == true))    
-      @match_picks = MatchPick.all 
+      @match_picks = MatchPick.all.order(:matchID, :userID) 
       puts params #Debug
     elsif (params[:block].to_i.between?(1,10)) 
-      @match_picks = MatchPick.where(:userID => session[:user_id], :blockID => params[:block].to_i)      
+      @match_picks = MatchPick.where(:userID => session[:user_id], :blockID => params[:block].to_i).order(:matchID, :userID)       
     else
       flash[:error] = 'Not a valid block'
       redirect_to :blocks

@@ -5,10 +5,10 @@ class MatchesController < ApplicationController
   
   def index
     if((params[:block].to_i == 0)&&(current_user.admin == true))    
-      @matches = Match.all 
+      @matches = Match.all.order(:id)
       puts params #Debug
-    elsif (params[:block].to_i.between?(1,10))  
-      @matches = Match.where(:block => params[:block].to_i)     
+    elsif (params[:block].to_i.between?(current_user.curr_block,10))  
+      @matches = Match.where(:block => params[:block].to_i).order(:id)     
     else    
       flash[:error] = 'Not a valid block'
       redirect_to :blocks
@@ -58,9 +58,9 @@ class MatchesController < ApplicationController
       end
     end
     
-    MatchPick.where(:matchID => params[:id]).update_all(result: match_params[:result])
-    MatchPick.where(:matchID => params[:id]).update_all(points: '0')
-    MatchPick.where(:matchID => params[:id], :userPick => match_params[:result]).update_all(points: '3')
+    MatchPick.where(:matchID => params[:id]).update_all(result: match_params[:result], closed: match_params[:played], points: 0)
+    MatchPick.where(:matchID => params[:id], :userPick => match_params[:result]).update_all(points: 3)
+    update_user_points
   end
 
   # DELETE /matches/1
@@ -72,6 +72,14 @@ class MatchesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def update_user_points
+    MatchPick.where(:matchID => params[:id], :userPick => match_params[:result]).each do |mp|
+      mp.user.update_attribute(:points, mp.user.points + 3)
+      puts params
+    end
+  end
+  
     
   def create_match_pick
      if params[:match_ids].nil?
