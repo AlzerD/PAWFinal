@@ -14,9 +14,11 @@
  *= require_self
  */
 .table td {
-   text-align: center;   
+   text-align: center;
+   font-weight: bold;
 }
 
 .table th {
    text-align: center;   
+   font-weight: bold;
 }

@@ -6,7 +6,7 @@ class MatchPicksController < ApplicationController
     if ((params[:block].to_i == 0)&&(current_user.admin == true))    
       @match_picks = MatchPick.all.order(:matchID, :userID) 
       puts params #Debug
-    elsif (params[:block].to_i.between?(1,10)) 
+    elsif (params[:block].to_i.between?(1,current_user.curr_block)) 
       @match_picks = MatchPick.where(:userID => session[:user_id], :blockID => params[:block].to_i).order(:matchID, :userID)       
     else
       flash[:error] = 'Not a valid block'

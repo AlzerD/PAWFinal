@@ -2,7 +2,7 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
   # GET /matches
   # GET /matches.json
-  
+
   def index
     if((params[:block].to_i == 0)&&(current_user.admin == true))    
       @matches = Match.all.order(:id)
@@ -61,6 +61,8 @@ class MatchesController < ApplicationController
     MatchPick.where(:matchID => params[:id]).update_all(result: match_params[:result], closed: match_params[:played], points: 0)
     MatchPick.where(:matchID => params[:id], :userPick => match_params[:result]).update_all(points: 3)
     update_user_points
+    assign_picks
+    
   end
 
   # DELETE /matches/1
@@ -101,9 +103,21 @@ class MatchesController < ApplicationController
      end
   end  
   
-  def update_match_score
-    puts params
-  end
+  def assign_picks
+    @current_blocks = CurrentBlock.where(:id => 1)
+    @users = User.where(:curr_block != @current_blocks[0].block)
+    @matches = Match.where(:block => @current_blocks[0].block)    
+         
+    @users.each do |user|
+      @matches.each do |match|
+        MatchPick.create!(:userID => user.id, :matchID => match.id, :blockID => @current_blocks[0].block, :userPick => (0..2).to_a.sample)
+      end
+    end
+      # Increase the current block for application
+       CurrentBlock.where(:id => 1).each do |cb|
+        cb.update_attribute(:block, cb.block + 1)
+     end      
+  end  
   
   
 

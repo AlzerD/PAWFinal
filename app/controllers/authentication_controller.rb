@@ -1,5 +1,8 @@
 # Class written by Alan Dunne after following tutorials by Marc Clifton [Available @ http://www.codeproject.com/Articles/575551/User-Authentication-in-Ruby-on-Rails#AdministratingUsers78]
 class AuthenticationController < ApplicationController
+ 
+  @@registration_close = '28th May 2014 22:10 +01:00'
+  
   def sign_in
     @user = User.new
   end
@@ -49,24 +52,36 @@ class AuthenticationController < ApplicationController
     
   
   def new_user
-    @user = User.new
+    if (DateTime.now > @@registration_close.to_datetime)
+      @user = User.new
+    else
+      flash[:notice] = 'Sorry but registration closed at 17:00 on 12th June 2014'
+      redirect_to :root      
+    end
+    
   end
   
   def register
-    @user = User.new(params[:user])
-  
-    if @user.valid?
-      update_authentication_token(@user, nil)
-      @user.signed_up_on = DateTime.now
-      @user.last_signed_in_on = @user.signed_up_on
-      @user.curr_block = 0
-      @user.save
-      UserMailer.welcome_email(@user).deliver
-      session[:user_id] = @user.id
-      flash[:notice] = 'Welcome.'
-      redirect_to :root
+    if (DateTime.now > @@registration_close.to_datetime)
+      @user = User.new(params[:user])
+
+      if @user.valid?
+        update_authentication_token(@user, nil)
+        @user.signed_up_on = DateTime.now
+        @user.last_signed_in_on = @user.signed_up_on
+        @user.curr_block = 0
+        @user.points = 0
+        @user.save
+        UserMailer.welcome_email(@user).deliver
+        session[:user_id] = @user.id
+        flash[:notice] = 'Welcome.'
+        redirect_to :root
+      else
+        render :action => "new_user"
+      end
     else
-      render :action => "new_user"
+      flash[:notice] = 'Sorry but registration closed at 17:00 on 12th June 2014'
+      redirect_to :root
     end
   end  
   

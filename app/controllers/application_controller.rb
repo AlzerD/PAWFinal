@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   
   def authenticate_admin
     if current_user.admin != true
-      flash[:error] = 'Sorry but you do not have access to that page'
+      flash[:error] = 'Not a valid page'
         redirect_to :root 
     end 
   end    

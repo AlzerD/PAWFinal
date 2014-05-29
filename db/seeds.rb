@@ -74,4 +74,6 @@ User.create(username: 'TestUser', email: 'testuser@testicle.com', password: 'tes
 User.create(username: 'TestUser1', email: 'testuser1@testicle.com', password: 'test', password_confirmation: 'test', admin: false, points: 0, leagues: 00003, curr_block: 0)
 User.create(username: 'TestUser2', email: 'testuser2@testicle.com', password: 'test', password_confirmation: 'test', admin: false, points: 0, leagues: 00004, curr_block: 0)
 User.create(username: 'TestUser3', email: 'testuser3@testicle.com', password: 'test', password_confirmation: 'test', admin: false, points: 0, leagues: 00005, curr_block: 0)
+CurrentBlock.create(block: 1)
+
 

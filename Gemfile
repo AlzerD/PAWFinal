@@ -42,6 +42,8 @@ gem 'protected_attributes'
 
 gem 'recaptcha', :require => "recaptcha/rails"
 
+gem 'delayed_job_active_record', '4.0.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,6 +53,6 @@ gem 'recaptcha', :require => "recaptcha/rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+
+gem 'debugger', group: [:development, :test]
 
