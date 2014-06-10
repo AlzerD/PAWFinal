@@ -6,7 +6,7 @@ class Match < ActiveRecord::Base
   
     # register the timer
   def set_expiry_timer
-    delay(:run_at => Proc.new{5.minutes.from_now}).assign_picks
+    self.delay_for(5.minutes).assign_picks
   end  
 
   
